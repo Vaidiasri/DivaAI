@@ -164,12 +164,12 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start">
                   <Show when="signed-out">
-                    <SignInButton mode="modal">
+                    <SignUpButton mode="modal">
                       <Button size="lg" className="h-16 px-10 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] font-bold text-lg transition-all active:scale-95 group">
                         Generate Free Video
                         <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                       </Button>
-                    </SignInButton>
+                    </SignUpButton>
                   </Show>
                   <Show when="signed-in">
                     <Button size="lg" asChild className="h-16 px-10 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] font-bold text-lg transition-all active:scale-95 group">
@@ -336,7 +336,16 @@ export default function Home() {
                       {feature}
                     </div>
                   ))}
-                  <Button variant="outline" className="w-full mt-6 h-12 rounded-xl border-white/10 hover:bg-white/5 font-bold uppercase tracking-widest text-xs">Start Now</Button>
+                  <Show when="signed-out">
+                    <SignUpButton mode="modal">
+                      <Button variant="outline" className="w-full mt-6 h-12 rounded-xl border-white/10 hover:bg-white/5 font-bold uppercase tracking-widest text-xs">Start Now</Button>
+                    </SignUpButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Button variant="outline" asChild className="w-full mt-6 h-12 rounded-xl border-white/10 hover:bg-white/5 font-bold uppercase tracking-widest text-xs">
+                      <Link href="/dashboard">Go to Dashboard</Link>
+                    </Button>
+                  </Show>
                 </CardContent>
               </Card>
 
@@ -367,7 +376,16 @@ export default function Home() {
                       {feature}
                     </div>
                   ))}
-                  <Button className="w-full mt-6 h-14 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 font-black uppercase tracking-widest text-xs shadow-lg shadow-purple-500/20">Become Unstoppable</Button>
+                  <Show when="signed-out">
+                    <SignUpButton mode="modal">
+                      <Button className="w-full mt-6 h-14 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 font-black uppercase tracking-widest text-xs shadow-lg shadow-purple-500/20">Become Unstoppable</Button>
+                    </SignUpButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Button asChild className="w-full mt-6 h-14 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:opacity-90 font-black uppercase tracking-widest text-xs shadow-lg shadow-purple-500/20">
+                      <Link href="/dashboard">Go to Dashboard</Link>
+                    </Button>
+                  </Show>
                 </CardContent>
               </Card>
 
@@ -414,11 +432,20 @@ export default function Home() {
                <p className="text-xl text-zinc-400 font-medium max-w-2xl leading-relaxed">
                  Join the elite 1% of creators who use AI to generate consistent, high-impact content every single day.
                </p>
-               <div className="flex flex-col sm:flex-row gap-6">
-                 <Button size="lg" className="h-20 px-12 rounded-[2rem] bg-white text-black hover:bg-zinc-200 font-black text-xl shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95">
-                   START YOUR EMPIRE
-                 </Button>
-               </div>
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <Show when="signed-out">
+                    <SignUpButton mode="modal">
+                      <Button size="lg" className="h-20 px-12 rounded-[2rem] bg-white text-black hover:bg-zinc-200 font-black text-xl shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95">
+                        START YOUR EMPIRE
+                      </Button>
+                    </SignUpButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Button size="lg" asChild className="h-20 px-12 rounded-[2rem] bg-white text-black hover:bg-zinc-200 font-black text-xl shadow-[0_0_50px_-10px_rgba(255,255,255,0.3)] transition-all hover:scale-105 active:scale-95">
+                      <Link href="/dashboard">ENTER DASHBOARD</Link>
+                    </Button>
+                  </Show>
+                </div>
                <div className="text-xs font-black tracking-[0.4em] uppercase text-zinc-600">No credit card required • cancel any time</div>
              </div>
            </div>
