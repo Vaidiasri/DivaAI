@@ -24,13 +24,13 @@ VidaAI is a premium SaaS platform designed to revolutionize video content creati
 
 VidaAI features a custom-built mobile navigation system with a sleek glassmorphism menu, ensuring your dashboard is always accessible on the go.
 
-![Mobile Preview](public/mobile_menu.png)
+![Mobile Preview](public/mobile_preview.png)
 
 ## 🎨 Professional Layout
 
 Every section, from the feature cards to the comprehensive footer, is crafted with a focus on visual excellence and conversion.
 
-![Footer Preview](public/footer.png)
+![Features Preview](public/features.png)
 
 ## 🚀 Getting Started
 
