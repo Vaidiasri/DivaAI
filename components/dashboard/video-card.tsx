@@ -59,8 +59,8 @@ export function VideoCard({ title, thumbnail, status, progress, timestamp }: Vid
       {/* Content Area */}
       <div className="p-6">
         <div className="flex items-start justify-between mb-4">
-          <div>
-            <h3 className="text-lg font-bold tracking-tight text-white group-hover:text-purple-400 transition-colors uppercase truncate max-w-[200px]">{title}</h3>
+          <div className="min-w-0 flex-1">
+            <h3 className="text-lg font-bold tracking-tight text-white group-hover:text-purple-400 transition-colors uppercase truncate">{title}</h3>
             <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest mt-1">{timestamp}</p>
           </div>
           <button className="h-8 w-8 rounded-lg hover:bg-white/5 flex items-center justify-center text-zinc-500 hover:text-white transition-all">

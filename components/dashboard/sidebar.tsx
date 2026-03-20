@@ -13,11 +13,11 @@ const navItems = [
   { label: "Settings", icon: Settings, href: "/dashboard/settings" },
 ]
 
-export function DashboardSidebar() {
+export function SidebarContent({ className }: { className?: string }) {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden h-screen w-72 border-r border-white/5 bg-zinc-950/80 backdrop-blur-3xl lg:flex flex-col p-8 gap-12 sticky top-0 shrink-0">
+    <div className={cn("flex flex-col h-full gap-12", className)}>
       {/* Logo Area */}
       <Link href="/" className="flex items-center gap-3 group">
         <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 shadow-xl shadow-purple-500/20 group-hover:scale-110 transition-all">
@@ -54,6 +54,14 @@ export function DashboardSidebar() {
           Support
         </Link>
       </div>
+    </div>
+  )
+}
+
+export function DashboardSidebar() {
+  return (
+    <aside className="hidden lg:flex h-screen w-72 border-r border-white/5 bg-zinc-950/80 backdrop-blur-3xl flex-col p-8 sticky top-0 shrink-0">
+      <SidebarContent />
     </aside>
   )
 }
