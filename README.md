@@ -1,5 +1,7 @@
 # VidaAI — AI Video Generator & Scheduler
 
+![VidaAI Banner](public/banner_v2.png)
+
 VidaAI is a premium SaaS platform designed to revolutionize video content creation. Using advanced AI, it allows users to generate and auto-schedule high-quality short videos for **YouTube, Instagram, Facebook, and Email**.
 
 ## 🚀 Key Features
@@ -10,6 +12,8 @@ VidaAI is a premium SaaS platform designed to revolutionize video content creati
 - **📱 Ultra-Responsive UX**: Market-ready mobile navigation with a professional 5-item bottom bar and slide-out drawer.
 - **💎 High-Fidelity Design**: Crafted with a focus on visual excellence, glassmorphism, and precise spacing.
 
+![Dashboard Preview](public/dashboard_v2.png)
+
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js 15+](https://nextjs.org/) (App Router)
@@ -18,6 +22,12 @@ VidaAI is a premium SaaS platform designed to revolutionize video content creati
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **Components**: [Shadcn UI](https://ui.shadcn.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
+
+## 📱 Mobile Optimized
+
+VidaAI features an ultra-responsive layout designed for the modern creator. The 5-item navigation bar and intuitive mobile drawer ensure that creating content on the go is as seamless as on a desktop.
+
+![Mobile Navigation](public/mobile_v2.png)
 
 ## ⚙️ Environment Variables
 
