@@ -1,0 +1,19 @@
+# Qodo PR-Agent Configuration
+
+[pr_review]
+# Automatically provide a summary of the PR
+publish_summary = true
+# Provide a list of code suggestions
+publish_code_suggestions = true
+# Provide a security review
+security_review = true
+
+[pr_description]
+# Automatically generate a description for the PR
+publish_description = true
+# Add a "How to test" section
+add_test_instructions = true
+
+[pr_agent]
+# Enable extra instructions for specific review styles
+extra_instructions = "Focus on mobile responsiveness, accessibility, and modern CSS practices."
