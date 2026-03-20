@@ -1,27 +1,31 @@
 import Image from "next/image";
 import Link from "next/link";
-import { 
-  Video, 
-  Calendar, 
-  Share2, 
-  PieChart, 
-  Zap, 
-  Youtube, 
-  Instagram, 
-  Facebook, 
-  Mail, 
+import { UserButton, Show, SignInButton, SignUpButton } from "@clerk/nextjs";
+import {
+  Video,
+  Calendar,
+  Share2,
+  PieChart,
+  Zap,
+  Youtube,
+  Instagram,
+  Facebook,
+  Mail,
   Check,
   ArrowRight,
-  Menu
+  Menu,
+  Plus,
+  Search,
+  Settings
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { 
-  Sheet, 
-  SheetContent, 
-  SheetHeader, 
-  SheetTitle, 
-  SheetTrigger 
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
 } from "@/components/ui/sheet";
 
 export default function Home() {
@@ -32,33 +36,56 @@ export default function Home() {
 
       {/* --- Navbar --- */}
       <header className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/40 backdrop-blur-xl">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4 sm:px-6">
-          <Link href="/" className="flex items-center gap-2 group shrink-0">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform">
-              <Video className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold tracking-tight text-white group-hover:text-purple-400 transition-colors">VidaAI</span>
-          </Link>
+        <div className="container mx-auto h-16 px-4 sm:px-6 flex items-center justify-between">
+          {/* LEFT: Logo */}
+          <div className="flex-1 flex justify-start">
+            <Link href="/" className="flex items-center gap-2 group shrink-0">
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform">
+                <Video className="h-5 w-5 text-white" />
+              </div>
+              <span className="text-xl font-bold tracking-tight text-white group-hover:text-purple-400 transition-colors">VidaAI</span>
+            </Link>
+          </div>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
-            <Link href="#features" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-all hover:tracking-[0.2em]">Features</Link>
-            <Link href="#how-it-works" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-all hover:tracking-[0.2em]">How it Works</Link>
-            <Link href="#pricing" className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-white transition-all hover:tracking-[0.2em]">Pricing</Link>
+          {/* CENTER: Links */}
+          <nav className="hidden lg:flex flex-none items-center gap-12">
+            <Link href="#how-it-works" className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 hover:text-white transition-all hover:scale-110">How it Works</Link>
+            <Link href="#features" className="text-[10px] font-black uppercase tracking-[0.3em] text-zinc-400 hover:text-white transition-all hover:scale-110">Features</Link>
           </nav>
 
-          <div className="flex items-center gap-2 sm:gap-4">
-            <Button variant="ghost" className="hidden md:inline-flex text-xs font-bold uppercase tracking-tighter text-zinc-300 hover:text-white hover:bg-white/5">Log in</Button>
-            <Button className="hidden min-[400px]:inline-flex rounded-full bg-white text-black hover:bg-zinc-200 px-4 sm:px-6 font-bold shadow-xl shadow-white/10 hover:scale-105 transition-all text-[10px] sm:text-xs">Start Free</Button>
-            
-            {/* Mobile Menu Trigger */}
+          {/* RIGHT: Auth & Mobile Menu */}
+          <div className="flex-1 flex items-center justify-end gap-2 sm:gap-6">
+            <div className="hidden md:flex items-center gap-6">
+              <Show when="signed-out">
+                <div className="flex items-center gap-8">
+                  <SignInButton mode="modal">
+                    <button className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 hover:text-white transition-all">
+                      Login
+                    </button>
+                  </SignInButton>
+                  <SignUpButton mode="modal">
+                    <button className="px-6 py-2.5 rounded-full bg-white text-black text-[10px] font-black uppercase tracking-[0.2em] hover:bg-zinc-200 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/10">
+                      Join Free
+                    </button>
+                  </SignUpButton>
+                </div>
+              </Show>
+              <Show when="signed-in">
+                <div className="flex items-center gap-6">
+                  <Link href="/dashboard" className="text-[10px] font-black uppercase tracking-[0.2em] text-white hover:text-purple-400 transition-all">Dashboard</Link>
+                  <UserButton />
+                </div>
+              </Show>
+            </div>
+
+            {/* Mobile Burger (LG:Hidden) */}
             <Sheet>
               <SheetTrigger asChild>
                 <Button variant="ghost" size="icon" className="lg:hidden h-9 w-9 border border-white/10 rounded-xl hover:bg-white/5 shrink-0">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="bg-zinc-950/98 border-l border-white/10 backdrop-blur-3xl p-0 flex flex-col">
+              <SheetContent side="right" className="w-full sm:w-[400px] border-white/5 bg-zinc-950/95 backdrop-blur-2xl p-0 flex flex-col">
                 <SheetHeader className="p-8 border-b border-white/5 bg-white/5">
                   <SheetTitle className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-blue-500 shadow-lg shadow-purple-500/20">
@@ -82,13 +109,29 @@ export default function Home() {
                       <div className="h-1 w-0 bg-purple-500 transition-all group-hover:w-10" />
                     </Link>
                   </nav>
-                  
+
                   <div className="flex flex-col gap-6">
                     <hr className="border-white/5" />
-                    <Button variant="outline" className="h-14 rounded-2xl border-white/10 glass text-zinc-300 font-bold uppercase tracking-widest text-xs">Log In</Button>
-                    <Button className="h-16 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 font-black tracking-[0.2em] text-xs uppercase shadow-xl shadow-purple-500/20 hover:scale-[1.02] transition-transform">
-                      Get Started
-                    </Button>
+                    <Show when="signed-out">
+                      <SignInButton mode="modal">
+                        <Button variant="outline" className="h-14 rounded-2xl border-white/10 glass text-zinc-300 font-bold uppercase tracking-widest text-xs">
+                          Log In
+                        </Button>
+                      </SignInButton>
+                      <SignUpButton mode="modal">
+                        <Button className="h-16 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 font-black tracking-[0.2em] text-xs uppercase shadow-xl shadow-purple-500/20 hover:scale-[1.02] transition-transform">
+                          Get Started
+                        </Button>
+                      </SignUpButton>
+                    </Show>
+                    <Show when="signed-in">
+                       <Button variant="outline" asChild className="h-14 rounded-2xl border-white/10 glass text-zinc-300 font-bold uppercase tracking-widest text-xs">
+                        <a href="/dashboard">Dashboard</a>
+                      </Button>
+                      <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
+                        <UserButton showName />
+                      </div>
+                    </Show>
                   </div>
                 </div>
               </SheetContent>
@@ -104,7 +147,7 @@ export default function Home() {
           <div className="absolute inset-0 z-0 bg-grid-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] opacity-20" />
           <div className="absolute top-0 -left-1/4 h-[800px] w-[800px] rounded-full bg-purple-600/10 blur-[160px] animate-pulse" />
           <div className="absolute bottom-0 -right-1/4 h-[800px] w-[800px] rounded-full bg-blue-600/10 blur-[160px] animate-pulse delay-700" />
-          
+
           <div className="container relative z-10 mx-auto px-6 text-center lg:text-left">
             <div className="grid grid-cols-1 gap-20 lg:grid-cols-2 lg:items-center">
               <div className="flex flex-col gap-10">
@@ -120,10 +163,22 @@ export default function Home() {
                   One prompt. Four platforms. Infinite growth. Our AI engine generates, edits, and schedules your content while you sleep.
                 </p>
                 <div className="flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-start">
-                  <Button size="lg" className="h-16 px-10 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] font-bold text-lg transition-all active:scale-95">
-                    Generate Free Video
-                    <ArrowRight className="ml-2 h-6 w-6" />
-                  </Button>
+                  <Show when="signed-out">
+                    <SignInButton mode="modal">
+                      <Button size="lg" className="h-16 px-10 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] font-bold text-lg transition-all active:scale-95 group">
+                        Generate Free Video
+                        <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </SignInButton>
+                  </Show>
+                  <Show when="signed-in">
+                    <Button size="lg" asChild className="h-16 px-10 rounded-2xl bg-gradient-to-r from-purple-600 to-blue-600 text-white hover:shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] font-bold text-lg transition-all active:scale-95 group">
+                      <Link href="/dashboard" className="flex items-center">
+                        Go to Dashboard
+                        <ArrowRight className="ml-2 h-6 w-6 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </Button>
+                  </Show>
                   <Button variant="outline" size="lg" className="h-16 px-10 rounded-2xl border-white/10 glass hover:bg-white/10 font-bold transition-all">
                     View Showcase
                   </Button>
@@ -142,7 +197,7 @@ export default function Home() {
               <div className="relative mx-auto w-full max-w-[650px] group transition-all duration-700 hover:rotate-2">
                 {/* Visual Halo */}
                 <div className="absolute -inset-4 rounded-3xl bg-gradient-to-r from-purple-600 to-blue-500 opacity-20 blur-2xl transition duration-1000 group-hover:opacity-40" />
-                
+
                 <div className="relative aspect-video overflow-hidden rounded-2xl border border-white/20 bg-zinc-950 shadow-[0_0_80px_-20px_rgba(0,0,0,0.8)] glass">
                   <Image
                     src="/hero_preview.png"
