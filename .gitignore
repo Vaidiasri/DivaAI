@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# antigravity / gemini
+.agents/
+.gemini/
+brain/
+*.metadata.json
+*.resolved
+*.resolved.*
