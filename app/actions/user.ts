@@ -1,7 +1,7 @@
 "use server"
 
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { supabase } from "@/lib/supabase";
+import { supabaseServer } from "@/lib/supabase-server";
 
 export async function syncUserWithSupabase() {
   const { userId } = await auth();
@@ -14,7 +14,7 @@ export async function syncUserWithSupabase() {
   const name = `${user.firstName || ""} ${user.lastName || ""}`.trim();
 
   try {
-    const { data, error } = await supabase
+    const { data, error } = await supabaseServer
       .from("users")
       .upsert(
         { 
