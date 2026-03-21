@@ -58,8 +58,8 @@ export function TopicStep({ formData, setFormData, onNext }: StepProps) {
             placeholder="e.g. AI-driven productivity hacks..."
             className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-zinc-600 font-medium"
             value={formData.topic}
-            onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-            onKeyDown={(e) => e.key === 'Enter' && onNext?.()}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({ ...formData, topic: e.target.value })}
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && onNext?.()}
           />
           <button 
             onClick={onNext}
