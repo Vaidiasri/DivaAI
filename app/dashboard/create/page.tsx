@@ -15,6 +15,7 @@ import { MusicStep } from "@/components/dashboard/create/music-step"
 import { StyleStep } from "@/components/dashboard/create/style-step"
 import { CaptionStep } from "@/components/dashboard/create/caption-step"
 import { ScheduleStep } from "@/components/dashboard/create/schedule-step"
+import { VideoFormData } from "@/types/dashboard"
 
 const steps = [
   { id: "topic", title: "Vision", component: TopicStep },
@@ -28,14 +29,16 @@ const steps = [
 
 export default function CreateVideoPage() {
   const [currentStep, setCurrentStep] = useState(0)
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<VideoFormData>({
     topic: "",
-    language: "English",
+    language: "en",
     voice: "",
     music: "",
     style: "",
     captionStyle: "",
-    schedule: null,
+    schedule: "now",
+    scheduleDate: "",
+    scheduleTime: "",
   })
 
   const progress = ((currentStep + 1) / steps.length) * 100

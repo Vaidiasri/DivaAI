@@ -49,11 +49,14 @@ export default async function DashboardPage() {
             <p className="text-zinc-500 font-bold uppercase tracking-[0.2em] text-[8px] sm:text-[10px]">Manage and schedule your AI-generated shorts.</p>
           </div>
           
-          <Link href="/dashboard/create">
-            <button className="group flex items-center justify-center gap-3 px-8 py-3.5 sm:px-10 sm:py-5 rounded-2xl sm:rounded-[2rem] bg-gradient-to-r from-purple-600 to-blue-600 text-white font-black text-xs uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] w-full sm:w-auto">
-              <Plus className="h-5 w-5" />
-              New Production
-            </button>
+          <Link 
+            href="/dashboard/create"
+            className="group flex items-center justify-center gap-3 px-8 py-3.5 sm:px-10 sm:py-5 rounded-2xl sm:rounded-[2rem] bg-gradient-to-r from-purple-600 to-blue-600 text-white font-black text-xs uppercase tracking-[0.3em] hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_-10px_rgba(168,85,247,0.5)] w-full sm:w-auto"
+            role="button"
+            aria-label="New Production"
+          >
+            <Plus className="h-5 w-5" />
+            New Production
           </Link>
         </div>
       </div>
@@ -62,7 +65,7 @@ export default async function DashboardPage() {
       <div className="space-y-8 sm:space-y-10">
         <div className="flex items-center justify-between border-b border-white/5 pb-4">
           <h2 className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] text-zinc-500">Recently Created</h2>
-          <button className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] text-purple-400 hover:text-purple-300 transition-colors">View All</button>
+          <Link href="/dashboard/library" className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.4em] text-purple-400 hover:text-purple-300 transition-colors">View All</Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-8 lg:gap-10">

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Plus, Layout, History, Video } from "lucide-react"
+import { Plus, Layout, History, Settings } from "lucide-react"
 import { UserButton } from "@clerk/nextjs"
 
 export function MobileNav() {
@@ -15,27 +15,28 @@ export function MobileNav() {
           }} />
         </div>
 
-        <Link href="/dashboard" className="text-zinc-500 hover:text-purple-400 transition-colors w-10 flex justify-center">
+        <Link href="/dashboard" className="text-zinc-500 hover:text-purple-400 transition-colors w-10 flex justify-center" aria-label="Overview">
           <Layout size={20} />
         </Link>
 
         {/* Center Prompt / Action */}
         <div className="relative h-full flex items-center justify-center">
-          <Link href="/dashboard/create">
-            <button className="h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center -translate-y-6 shadow-2xl shadow-purple-500/40 border-4 border-zinc-950 hover:scale-110 active:scale-95 transition-all">
-              <Plus className="text-white size-6" />
-            </button>
+          <Link 
+            href="/dashboard/create"
+            className="h-12 w-12 rounded-2xl bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center -translate-y-6 shadow-2xl shadow-purple-500/40 border-4 border-zinc-950 hover:scale-110 active:scale-95 transition-all"
+            role="button"
+            aria-label="New Production"
+          >
+            <Plus className="text-white size-6" />
           </Link>
         </div>
 
-        <Link href="/dashboard" className="text-zinc-500 hover:text-white transition-colors w-10 flex justify-center">
+        <Link href="/dashboard/history" className="text-zinc-500 hover:text-white transition-colors w-10 flex justify-center" aria-label="History">
           <History size={20} />
         </Link>
 
-        <Link href="/" className="w-10 flex justify-center">
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center shadow-lg shadow-purple-500/20">
-            <Video className="h-4 w-4 text-white" />
-          </div>
+        <Link href="/dashboard/settings" className="text-zinc-500 hover:text-white transition-colors w-10 flex justify-center" aria-label="Settings">
+          <Settings size={20} />
         </Link>
     </div>
   )

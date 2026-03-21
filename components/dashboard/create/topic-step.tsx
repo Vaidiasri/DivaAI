@@ -1,8 +1,9 @@
 "use client"
 
-import { Input } from "@/components/ui/button"
 import { Search, Sparkles, TrendingUp } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { StepProps } from "@/types/dashboard"
 
 const trendingNiches = [
   { 
@@ -31,7 +32,7 @@ const trendingNiches = [
   },
 ]
 
-export function TopicStep({ formData, setFormData, onNext }: any) {
+export function TopicStep({ formData, setFormData, onNext }: StepProps) {
   const handleSelect = (niche: string) => {
     setFormData({ ...formData, topic: niche })
   }
@@ -40,7 +41,7 @@ export function TopicStep({ formData, setFormData, onNext }: any) {
     <div className="space-y-12">
       <div className="space-y-4">
         <h2 className="text-3xl sm:text-4xl font-black tracking-tight flex items-center gap-3">
-          What's the vision? <Sparkles className="text-purple-500 fill-purple-500/20" size={32} />
+          What&apos;s the vision? <Sparkles className="text-purple-500 fill-purple-500/20" size={32} />
         </h2>
         <p className="text-zinc-400 text-lg">
           Describe your video idea or select a trending niche to start.
@@ -58,7 +59,7 @@ export function TopicStep({ formData, setFormData, onNext }: any) {
             className="flex-1 bg-transparent border-none outline-none text-white placeholder:text-zinc-600 font-medium"
             value={formData.topic}
             onChange={(e) => setFormData({ ...formData, topic: e.target.value })}
-            onKeyDown={(e) => e.key === 'Enter' && onNext()}
+            onKeyDown={(e) => e.key === 'Enter' && onNext?.()}
           />
           <button 
             onClick={onNext}
@@ -90,10 +91,11 @@ export function TopicStep({ formData, setFormData, onNext }: any) {
                 formData.topic === niche.title ? "border-purple-600 ring-4 ring-purple-600/20 scale-[0.98]" : "border-white/5 hover:border-white/20"
               )}
             >
-              <img 
+              <Image 
                 src={niche.image} 
+                fill
                 className={cn(
-                  "absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-110",
+                  "object-cover transition-transform duration-700 group-hover:scale-110",
                   formData.topic === niche.title ? "brightness-50" : "brightness-[0.4]"
                 )}
                 alt={niche.title}

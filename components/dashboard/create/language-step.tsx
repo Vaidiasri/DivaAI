@@ -3,6 +3,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { cn } from "@/lib/utils"
 import { Globe, Languages } from "lucide-react"
+import { StepProps } from "@/types/dashboard"
 
 const languages = [
   { id: "en", name: "English", flag: "🇺🇸" },
@@ -15,9 +16,9 @@ const languages = [
   { id: "ru", name: "Russian", flag: "🇷🇺" },
 ]
 
-export function LanguageStep({ formData, setFormData }: any) {
-  const handleSelect = (lang: string) => {
-    setFormData({ ...formData, language: lang })
+export function LanguageStep({ formData, setFormData }: StepProps) {
+  const handleSelect = (langId: string) => {
+    setFormData({ ...formData, language: langId })
   }
 
   return (
@@ -47,10 +48,10 @@ export function LanguageStep({ formData, setFormData }: any) {
           {languages.map((lang) => (
             <button
               key={lang.id}
-              onClick={() => handleSelect(lang.name)}
+              onClick={() => handleSelect(lang.id)}
               className={cn(
                 "group relative p-6 rounded-2xl bg-zinc-900 border-2 transition-all flex flex-col items-center gap-4 hover:scale-[1.02] active:scale-[0.98]",
-                formData.language === lang.name 
+                formData.language === lang.id 
                 ? "border-purple-600 bg-purple-600/5 shadow-2xl shadow-purple-500/10" 
                 : "border-white/5 hover:border-white/10"
               )}
@@ -58,12 +59,12 @@ export function LanguageStep({ formData, setFormData }: any) {
               <span className="text-4xl group-hover:scale-110 transition-transform">{lang.flag}</span>
               <span className={cn(
                 "text-sm font-bold tracking-tight",
-                formData.language === lang.name ? "text-purple-400" : "text-zinc-400 group-hover:text-white"
+                formData.language === lang.id ? "text-purple-400" : "text-zinc-400 group-hover:text-white"
               )}>
                 {lang.name}
               </span>
 
-              {formData.language === lang.name && (
+              {formData.language === lang.id && (
                  <div className="absolute top-3 right-3 h-5 w-5 bg-purple-600 rounded-full flex items-center justify-center">
                     <div className="h-2 w-2 bg-white rounded-full" />
                  </div>

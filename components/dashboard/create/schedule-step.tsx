@@ -1,15 +1,22 @@
 "use client"
 
-import { Calendar, Play, Clock, Rocket, FileText, CheckCircle2 } from "lucide-react"
+import { Calendar, Clock, Rocket, FileText, CheckCircle2 } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { StepProps } from "@/types/dashboard"
 
 const scheduleOptions = [
-  { id: "now", title: "Post Now", description: "Generate and publish immediately", icon: Rocket, color: "from-purple-600 to-blue-500" },
-  { id: "schedule", title: "Schedule", description: "Choose a custom date and time", icon: Clock, color: "from-blue-500 to-cyan-500" },
-  { id: "draft", title: "Save as Draft", description: "Prepare now, decide later", icon: FileText, color: "from-zinc-600 to-zinc-400" },
+  { id: "now", title: "Post Now", description: "Generate and publish immediately", icon: Rocket },
+  { id: "schedule", title: "Schedule", description: "Choose a custom date and time", icon: Clock },
+  { id: "draft", title: "Save as Draft", description: "Prepare now, decide later", icon: FileText },
 ]
 
-export function ScheduleStep({ formData, setFormData }: any) {
+const colorVariants: Record<string, string> = {
+  now: "bg-gradient-to-br from-purple-600 to-blue-500",
+  schedule: "bg-gradient-to-br from-blue-500 to-cyan-500",
+  draft: "bg-gradient-to-br from-zinc-600 to-zinc-400",
+}
+
+export function ScheduleStep({ formData, setFormData }: StepProps) {
   const handleSelect = (option: string) => {
     setFormData({ ...formData, schedule: option })
   }
@@ -30,6 +37,7 @@ export function ScheduleStep({ formData, setFormData }: any) {
           <button
             key={option.id}
             onClick={() => handleSelect(option.id)}
+            type="button"
             className={cn(
               "group relative p-8 rounded-3xl bg-zinc-900 border-2 transition-all flex flex-col items-center gap-6 text-center hover:scale-[1.02]",
               formData.schedule === option.id 
@@ -40,7 +48,7 @@ export function ScheduleStep({ formData, setFormData }: any) {
             <div className={cn(
               "h-16 w-16 rounded-2xl flex items-center justify-center transition-all shadow-xl",
               formData.schedule === option.id 
-              ? `bg-gradient-to-br ${option.color} text-white` 
+              ? `${colorVariants[option.id]} text-white` 
               : "bg-white/5 text-zinc-500 group-hover:bg-white/10 group-hover:text-white"
             )}>
               <option.icon size={32} />
@@ -68,13 +76,23 @@ export function ScheduleStep({ formData, setFormData }: any) {
                <Calendar size={16} /> Select Date & Time
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-               <div className="h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center px-6 text-zinc-400 font-bold justify-between">
-                  Saturday, March 21
-                  <Calendar size={20} />
+               <div className="h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center px-6 text-white font-bold relative group">
+                  <input 
+                    type="date" 
+                    className="flex-1 bg-transparent border-none outline-none text-sm cursor-pointer [color-scheme:dark]"
+                    value={formData.scheduleDate}
+                    onChange={(e) => setFormData({...formData, scheduleDate: e.target.value})}
+                  />
+                  <Calendar size={20} className="text-zinc-500 group-focus-within:text-purple-500 transition-colors" />
                </div>
-               <div className="h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center px-6 text-zinc-400 font-bold justify-between">
-                  09:00 PM
-                  <Clock size={20} />
+               <div className="h-14 bg-white/5 border border-white/10 rounded-2xl flex items-center px-6 text-white font-bold relative group">
+                  <input 
+                    type="time" 
+                    className="flex-1 bg-transparent border-none outline-none text-sm cursor-pointer [color-scheme:dark]"
+                    value={formData.scheduleTime}
+                    onChange={(e) => setFormData({...formData, scheduleTime: e.target.value})}
+                  />
+                  <Clock size={20} className="text-zinc-500 group-focus-within:text-purple-500 transition-colors" />
                </div>
             </div>
          </div>
@@ -85,17 +103,17 @@ export function ScheduleStep({ formData, setFormData }: any) {
          <div className="flex flex-wrap gap-6 items-center opacity-40 grayscale group-hover:opacity-100 transition-opacity">
             <div className="space-y-1">
                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Niche</p>
-               <p className="text-xs font-bold">{formData.topic || 'Not set'}</p>
+               <p className="text-xs font-bold text-white">{formData.topic || 'Not set'}</p>
             </div>
             <div className="w-[1px] h-8 bg-white/10" />
             <div className="space-y-1">
                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Narrator</p>
-               <p className="text-xs font-bold">{formData.voice || 'Not set'}</p>
+               <p className="text-xs font-bold text-white">{formData.voice || 'Not set'}</p>
             </div>
             <div className="w-[1px] h-8 bg-white/10" />
             <div className="space-y-1">
                <p className="text-[10px] font-black uppercase tracking-widest text-zinc-500">Style</p>
-               <p className="text-xs font-bold">{formData.style || 'Not set'}</p>
+               <p className="text-xs font-bold text-white">{formData.style || 'Not set'}</p>
             </div>
          </div>
       </div>

@@ -1,7 +1,9 @@
 "use client"
 
-import { Play, Mic2, Sparkles } from "lucide-react"
+import { useState } from "react"
+import { Play, Mic2, Sparkles, Pause } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { StepProps } from "@/types/dashboard"
 
 const voices = [
   { id: "marcus", name: "Marcus", role: "Energetic & Hype", type: "Male", category: "Energetic" },
@@ -11,7 +13,19 @@ const voices = [
   { id: "arthur", name: "Arthur", role: "Deep & Narrative", type: "Male", category: "Cinematic" },
 ]
 
-export function VoiceStep({ formData, setFormData }: any) {
+const categories = ["All", "Energetic", "Calm", "Cinematic"]
+
+export function VoiceStep({ formData, setFormData }: StepProps) {
+  const [playingId, setPlayingId] = useState<string | null>(null)
+  const [selectedCategory, setSelectedCategory] = useState("All")
+
+  const filteredVoices = voices.filter(v => selectedCategory === "All" || v.category === selectedCategory)
+
+  const togglePlay = (e: React.MouseEvent, id: string) => {
+    e.stopPropagation()
+    setPlayingId(playingId === id ? null : id)
+  }
+
   return (
     <div className="space-y-12 pb-10">
       <div className="space-y-4">
@@ -25,12 +39,16 @@ export function VoiceStep({ formData, setFormData }: any) {
 
       <div className="space-y-6">
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-          {["All", "Energetic", "Calm", "Cinematic"].map((cat) => (
+          {categories.map((cat) => (
             <button
                key={cat}
+               onClick={() => setSelectedCategory(cat)}
+               type="button"
                className={cn(
                  "px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest border transition-all whitespace-nowrap",
-                 cat === "All" ? "bg-white text-black border-white" : "bg-transparent text-zinc-500 border-white/10 hover:border-white/20"
+                 selectedCategory === cat 
+                 ? "bg-white text-black border-white" 
+                 : "bg-transparent text-zinc-500 border-white/10 hover:border-white/20"
                )}
             >
               {cat}
@@ -39,26 +57,30 @@ export function VoiceStep({ formData, setFormData }: any) {
         </div>
 
         <div className="space-y-3">
-          {voices.map((voice) => (
+          {filteredVoices.map((voice) => (
             <button
               key={voice.id}
-              onClick={() => setFormData({ ...formData, voice: voice.name })}
+              onClick={() => setFormData({ ...formData, voice: voice.id })}
+              type="button"
               className={cn(
                 "w-full group relative p-5 rounded-2xl bg-zinc-900 border-2 transition-all flex items-center justify-between",
-                formData.voice === voice.name 
+                formData.voice === voice.id 
                 ? "border-purple-600 bg-purple-600/5 shadow-xl shadow-purple-500/10" 
                 : "border-white/5 hover:border-white/10"
               )}
             >
               <div className="flex items-center gap-5">
-                <div className={cn(
-                  "h-12 w-12 rounded-xl flex items-center justify-center transition-all",
-                  formData.voice === voice.name ? "bg-purple-600 text-white" : "bg-white/5 text-zinc-500 group-hover:text-white group-hover:bg-white/10"
-                )}>
-                  <Play size={20} className="fill-current" />
+                <div 
+                  onClick={(e) => togglePlay(e, voice.id)}
+                  className={cn(
+                    "h-12 w-12 rounded-xl flex items-center justify-center transition-all cursor-pointer",
+                    playingId === voice.id ? "bg-white text-black" : (formData.voice === voice.id ? "bg-purple-600 text-white" : "bg-white/5 text-zinc-500 group-hover:text-white group-hover:bg-white/10")
+                  )}
+                >
+                  {playingId === voice.id ? <Pause size={20} className="fill-current" /> : <Play size={20} className="fill-current" />}
                 </div>
                 <div className="text-left">
-                  <h4 className="text-lg font-black tracking-tight flex items-center gap-2">
+                  <h4 className="text-lg font-black tracking-tight flex items-center gap-2 text-white">
                     {voice.name} 
                     {voice.id === "arthur" && <Sparkles size={14} className="text-purple-400" />}
                   </h4>
@@ -72,9 +94,9 @@ export function VoiceStep({ formData, setFormData }: any) {
                  </span>
                  <div className={cn(
                    "h-6 w-6 rounded-full border-2 flex items-center justify-center transition-all",
-                   formData.voice === voice.name ? "border-purple-600 bg-purple-600" : "border-white/10 bg-transparent"
+                   formData.voice === voice.id ? "border-purple-600 bg-purple-600" : "border-white/10 bg-transparent"
                  )}>
-                   {formData.voice === voice.name && <div className="h-2 w-2 bg-white rounded-full" />}
+                   {formData.voice === voice.id && <div className="h-2 w-2 bg-white rounded-full" />}
                  </div>
               </div>
             </button>

@@ -2,6 +2,8 @@
 
 import { Palette, Sparkles, Check } from "lucide-react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { StepProps } from "@/types/dashboard"
 
 const visualStyles = [
   { 
@@ -30,7 +32,7 @@ const visualStyles = [
   },
 ]
 
-export function StyleStep({ formData, setFormData }: any) {
+export function StyleStep({ formData, setFormData }: StepProps) {
   return (
     <div className="space-y-12 pb-10">
       <div className="space-y-4">
@@ -46,19 +48,20 @@ export function StyleStep({ formData, setFormData }: any) {
         {visualStyles.map((style) => (
           <button
             key={style.id}
-            onClick={() => setFormData({ ...formData, style: style.title })}
+            onClick={() => setFormData({ ...formData, style: style.id })}
             className={cn(
               "group relative h-56 rounded-3xl overflow-hidden border-2 transition-all text-left",
-              formData.style === style.title 
+              formData.style === style.id 
               ? "border-purple-600 ring-4 ring-purple-600/20" 
               : "border-white/5 hover:border-white/20"
             )}
           >
-            <img 
+            <Image 
               src={style.image} 
+              fill
               className={cn(
-                "absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110",
-                formData.style === style.title ? "brightness-50" : "brightness-[0.4]"
+                "object-cover transition-transform duration-1000 group-hover:scale-110",
+                formData.style === style.id ? "brightness-50" : "brightness-[0.4]"
               )}
               alt={style.title}
             />
@@ -76,7 +79,7 @@ export function StyleStep({ formData, setFormData }: any) {
                        {style.description}
                     </p>
                  </div>
-                 {formData.style === style.title && (
+                 {formData.style === style.id && (
                     <div className="h-8 w-8 rounded-full bg-purple-600 flex items-center justify-center shadow-lg shadow-purple-600/40 border-2 border-white/20 scale-110 transition-transform">
                        <Check size={16} className="text-white" />
                     </div>
