@@ -47,3 +47,6 @@ brain/
 *.metadata.json
 *.resolved
 *.resolved.*
+
+# local scripts
+copy_images.bat
